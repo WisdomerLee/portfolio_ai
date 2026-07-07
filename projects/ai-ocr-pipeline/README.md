@@ -26,20 +26,44 @@ PaddleOCR와 VLM을 결합해 문서에서 구조화된 정보를 추출하고, 
 - artifact 저장 구조와 디버깅 가능성 검토
 - 포트폴리오용 시스템 아키텍처 Mermaid 정리
 
-## Key Technologies
+## Tech Stack
 
 - Python
 - FastAPI
 - PaddleOCR
-- VLM / Vision LLM
-- PDF/Image preprocessing
-- Validation rules
-- Artifact storage
+- PyMuPDF
+- Pillow / OpenCV
+- VLM / Vision LLM API
+- SQLAlchemy
+- SQLite / PostgreSQL
+- Playwright
+
+## Core Implementation Logic
+
+- PDF를 page image로 렌더링하고 이미지 단위로 전처리
+- 회전 보정, split/crop, enhancement 등 OCR 전처리 수행
+- PaddleOCR로 line-level text, score, bbox, polygon 추출
+- OCR line을 `ocrId`, text, bbox, confidence 형태의 evidence로 정규화
+- VLM에 원본 이미지와 OCR evidence를 함께 전달해 구조화된 JSON 추출
+- VLM 결과의 `ocrIds`를 OCR line index와 연결해 raw text, bbox, confidence 복원
+- line item, discount, total amount, current/past due 등 validation rule chain 수행
+- result, trace, raw payload를 artifact로 저장해 실패 원인 분석 가능하게 구성
+
+## Architecture Pattern
+
+- OCR engine layer와 VLM extraction layer 분리
+- Evidence-driven extraction pattern
+- OCR line index 기반 bbox restoration
+- Validation rule chain
+- Artifact file store + DB index 분리
+- Batch job / SSE progress pattern
+- Human review와 ERP integration을 고려한 workflow boundary
 
 ## Result
 
 - OCR 결과와 VLM 추출 결과를 evidence 기반으로 연결하는 구조를 정리했습니다.
 - 합계 검증, bbox 복원, raw OCR text 비교, trace artifact 저장을 통해 검증 가능한 AI-OCR 결과를 만들 수 있는 구조를 도출했습니다.
+- 단순 OCR API가 아니라 디버깅과 운영 검증을 고려한 AI 문서 처리 파이프라인으로 확장했습니다.
 
 ## Detailed Documents
 
