@@ -2,7 +2,7 @@
 
 ## 한 줄 소개
 
-LLM/RAG Agent, 시계열 파운데이션 모델, AI-OCR, MCP Tool 연동, Hybrid Symbolic RL을 서비스 구조로 연결하고 검증하는 Python 기반 AI Application Engineer 포트폴리오입니다.
+LLM/RAG Agent, 시계열 파운데이션 모델, AI-OCR, MCP Tool 연동, Hybrid Symbolic RL을 서비스 구조로 연결하고 검증하는 Python 기반 AI Application Engineer입니다.
 
 ## 핵심 역량
 

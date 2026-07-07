@@ -1,6 +1,6 @@
 # Resume Project Summary
 
-이 문서는 점핏/사람인/이력서에 옮기기 쉬운 프로젝트 요약입니다.
+프로젝트 요약입니다.
 
 ## 1. LangGraph 기반 자가 교정형 RAG 서비스 PoC
 
@@ -37,9 +37,3 @@
 - 기존 RB Agent RAG API를 MCP Tool, Resource, Prompt 형태로 노출하는 FastMCP 기반 브리지 서버를 구현했습니다.
 - `ask_rag_agent`, 파일 업로드, 문서 검색, 분해형 query stage, feedback/FAQ tool을 MCP 인터페이스로 제공했습니다.
 - CUPID 관점으로 Tool 책임, 입출력 계약, session state, adapter boundary를 정리했습니다.
-
-## 이력서 상단 요약 예시
-
-```text
-Python 기반 AI Application Engineer로서 LLM/RAG Agent, 시계열 파운데이션 모델, AI-OCR, MCP Tooling, Hybrid Symbolic RL PoC를 수행했습니다. LangGraph 기반 자가 교정형 RAG, PaddleOCR+VLM 기반 문서 추출, DeepSpeed 기반 Moirai 추론 최적화, FastMCP 기반 MCP 서버 구조를 설계하고 검증했습니다. AI Coding Assistant를 활용하되 요구사항 정의, 아키텍처 설계, 코드 검토, 테스트, 성능 분석을 통해 PoC를 유지보수 가능한 구조로 정리하는 데 집중했습니다.
-```

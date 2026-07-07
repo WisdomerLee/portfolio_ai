@@ -40,14 +40,14 @@ sequenceDiagram
     participant Env as TwoSettlementMarketEnv
     participant Orch as BiddingOrchestrator
     participant Sym as SymbolicAgent
-    participant Opt as HierarchicalOptimizer
+    participant HiOpt as HierarchicalOptimizer
     participant DA as DASACOptimizer
     participant RT as RTSACOptimizer
     participant Eval as RLEvaluator
 
     Train->>Env: build environment
     Train->>Sym: build LLM or dummy symbolic agent
-    Train->>Opt: build hierarchical SAC optimizer
+    Train->>HiOpt: build hierarchical SAC optimizer
     Train->>Orch: compose env + symbolic + optimizer
 
     loop episode
@@ -67,7 +67,7 @@ sequenceDiagram
             RT-->>Orch: ess_power_ratio
             Orch->>Env: step(Action)
             Env-->>Orch: next_state, reward, info
-            Orch->>Opt: record requested/executed action
+            Orch->>HiOpt: record requested/executed action
             Orch->>RT: update_rt(step reward)
             alt q4 / hour boundary
                 Orch->>DA: update_da(hourly reward)
