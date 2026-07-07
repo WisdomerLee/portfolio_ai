@@ -27,23 +27,47 @@
 - LLM Symbolic Agent + SAC Numerical Optimizer 역할 분리 구조 설계
 - requested/executed action tracking 구조 문서화
 
-## Key Technologies
+## Tech Stack
 
 - Python
-- Reinforcement Learning
-- SAC
-- GRPO
+- PyTorch
 - Unsloth
 - TRL
-- PyTorch
-- LLM
-- Energy Market Simulation
+- SAC implementation
+- Gymnasium-style environment
+- Pandas
+- NumPy
+- Matplotlib
+- LLM API / local LLM runtime
+
+## Core Implementation Logic
+
+- 초기 접근에서는 LLM이 `strategy(state)` 함수를 생성하고, 해당 코드를 sandbox에서 실행
+- 코드 추출, syntax check, forbidden module check, locked-down execution을 거쳐 전략 함수 검증
+- GRPO reward function으로 function validity, no-cheating, simulation performance를 분리 평가
+- 개선 구조에서는 LLM이 수치 action이 아니라 market regime과 action guideline을 생성
+- guideline을 embedding하여 RL state의 추가 관측 정보로 주입
+- SAC optimizer가 DA reservation ratio와 RT ESS power ratio를 결정
+- 15분 단위 market step에서 reward = profit - baseline을 계산
+- requested action과 environment constraint 이후 executed action을 함께 기록
+
+## Architecture Pattern
+
+- Initial GRPO code-generation RL pattern
+- Hybrid Symbolic RL pattern
+- LLM Symbolic Agent + Numerical RL Optimizer 역할 분리
+- Hierarchical DA/RT SAC optimizer
+- Two-Settlement Market Environment
+- Replay buffer 분리: DA hour-level transition / RT 15min transition
+- Requested vs Executed Action tracking
+- Reward accounting and diagnostics
 
 ## Result
 
 - 초기 코드 생성형 RL 방식의 한계를 확인했습니다.
 - 이후 LLM은 전략 가이드라인을 생성하고, RL은 실제 수치 행동을 최적화하는 Hybrid Symbolic RL 구조가 더 안정적이라는 결론을 도출했습니다.
 - 15분 단위 Two-Settlement 환경, 1시간 DA 업데이트, 15분 RT 업데이트, DA/RT buffer 분리, requested/executed action 추적 구조를 정리했습니다.
+- PoC의 핵심 성과는 높은 수익률 자체보다, LLM과 RL의 역할을 분리해야 한다는 구조적 결론을 도출한 점입니다.
 
 ## Detailed Documents
 
