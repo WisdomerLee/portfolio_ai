@@ -55,3 +55,10 @@ portfolio_ai/
 5. 주요 구현 내용
 6. 결과와 한계
 7. 개선 방향
+
+## 시연 영상
+### ai-ocr-pipeline
+<video src="https://github.com/user-attachments/assets/8a19c4ec-1672-4a88-a9b5-07f159220946"></video>
+### time-series-ai-platform
+<video src="https://github.com/user-attachments/assets/8b91d9f1-7fc5-4b29-82f4-dc1f99ac65d8"></video>
+<video src="https://github.com/user-attachments/assets/91b37a4a-a449-4235-8fd0-b598cf334e75"></video>
